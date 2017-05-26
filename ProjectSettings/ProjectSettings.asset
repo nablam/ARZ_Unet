@@ -510,7 +510,7 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: ARZUnet
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: D:\_nabdir\AR_Z_main\ARZ_Shared_6.5.1\ARZ_Unet\Assets\WSATestCertificate.pfx
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
