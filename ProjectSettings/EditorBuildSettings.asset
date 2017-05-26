@@ -5,6 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BasicScene.unity
     guid: f7028c16d0911e4469bb55636d3f7cee
+  - enabled: 0
+    path: Assets/HoloToolkit-Examples/SharingWithUNET/Scenes/sharingwithunet.unity
+    guid: 2cb8a97d98d81224c8b7d0495d361558
+  - enabled: 1
+    path: Assets/Scenes/UnetMaster.unity
+    guid: 55fd32cc1fe64df4aaaecd6fbe068f0e
