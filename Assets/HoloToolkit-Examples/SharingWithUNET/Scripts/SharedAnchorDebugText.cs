@@ -16,6 +16,8 @@ namespace HoloToolkit.Examples.SharingWithUNET
         /// </summary>
         public NetworkDiscoveryWithAnchors NetworkDiscoveryObject;
 
+        public SpawnManager_ZombieSpawner zs;
+
         /// <summary>
         /// The text mesh we will write to.
         /// </summary>
@@ -115,8 +117,10 @@ namespace HoloToolkit.Examples.SharingWithUNET
                 wasClient ? "Client\n" : "",
                 wasServer ? "Server\n" : "",
                 ServerIp,
-                anchorEstablished ? "Anchored Here\n" : (wasImporting ? "Importing\n" : (wasDownloading ? "Downloading\n" : "Not Anchored\n")),
+                anchorEstablished ? "YO Anchored Here\n" : (wasImporting ? "YO Importing\n" : (wasDownloading ? "YO Downloading\n" : "Not Anchored\n")),
                 anchorName);
+
+            
         }
     }
 }

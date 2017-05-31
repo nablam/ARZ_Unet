@@ -10,6 +10,7 @@ namespace HoloToolkit.Examples.SharingWithUNET
     /// </summary>
     public class BulletController : MonoBehaviour
     {
+        public TextMesh tm;
         private void Start()
         {
             // The bullet's transform should be in local space to the Shared Anchor.
@@ -21,6 +22,8 @@ namespace HoloToolkit.Examples.SharingWithUNET
             // the shared coordinate system.
             Rigidbody rb = GetComponentInChildren<Rigidbody>();
             rb.velocity = transform.parent.TransformDirection(rb.velocity);
+
+            tm.text += transform.parent.name;
         }
     }
 }
