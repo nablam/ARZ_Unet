@@ -14,13 +14,9 @@ public class ZspawnDebug : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //for (int x = 0; x < texts.Length; x++) {
-        //    texts[x].text = " " + x;
-        //}
-
-        texts[0].text = this.transform.localPosition.ToString();
-        texts[1].text = this.transform.position.ToString();
-        texts[2].text = SharedCollection.Instance.transform.localPosition.ToString();
-        texts[3].text = SharedCollection.Instance.transform.position.ToString();
+        texts[0].text ="inv pos"+ SharedCollection.Instance.transform.InverseTransformPoint(this.transform.position).ToString();
+        texts[1].text ="inv loc"+ SharedCollection.Instance.transform.InverseTransformPoint(this.transform.localPosition).ToString();
+        texts[2].text = "loc="+this.transform.localPosition.ToString() + "  sharedloc" + SharedCollection.Instance.transform.localPosition.ToString();
+        texts[3].text = "pos="+this.transform.position.ToString()+ " sharedpos" + SharedCollection.Instance.transform.position.ToString(); ;
     }
 }

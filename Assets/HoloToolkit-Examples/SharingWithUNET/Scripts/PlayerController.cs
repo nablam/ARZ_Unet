@@ -20,6 +20,8 @@ namespace HoloToolkit.Examples.SharingWithUNET
         /// </summary>
         public GameObject bullet;
 
+        public GameObject crate;
+
         bool _zombieSpawnerPlaced=false;
         public GameObject ZombieSpawner;
 
@@ -92,23 +94,19 @@ namespace HoloToolkit.Examples.SharingWithUNET
             }
         }
 
-        private void Update()
-        {
-
+        private void PewPew() {
             if (isLocalPlayer)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    if (!_zombieSpawnerPlaced) {
-                        _zombieSpawnerPlaced = true;
-                        CmdPlaceSpawn();
-                    }
-                    else
-
-                    CmdFire();
+                {                
+                        CmdFire();
                 }
-            
             }
+        }
+        private void Update()
+        {
+            PewPew();
+
 
             // If we aren't the local player, we just need to make sure that the position of this object is set properly
             // so that we properly render their avatar in our world.
@@ -162,15 +160,25 @@ namespace HoloToolkit.Examples.SharingWithUNET
         }
 
         [Command]
+        void CmdCtrate()
+        {
+            Vector3 crateDir = transform.forward;
+            Vector3 cratePos = transform.position + crateDir * 0.5f;
+ 
+            GameObject nextCrate = (GameObject)Instantiate(crate, sharedWorldAnchorTransform.InverseTransformPoint(cratePos), Quaternion.Euler(crateDir));
+            
+            NetworkServer.Spawn(nextCrate);
+
+            // Clean up the bullet in 8 seconds.
+            Destroy(nextCrate, 20.0f);
+        }
+
+        [Command]
         void CmdPlaceSpawn()
         {
             Vector3 spawnerDirection = transform.forward;
             Vector3 spawnerPos = transform.position + spawnerDirection;// * 2f;
-
-            // The bullet needs to be transformed relative to the shared anchor.
-            //            GameObject nextSpawner = (GameObject)Instantiate(ZombieSpawner, sharedWorldAnchorTransform.InverseTransformPoint(spawnerPos), Quaternion.Euler(spawnerDirection));
-            sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;
-            GameObject nextSpawner = (GameObject)Instantiate(ZombieSpawner, sharedWorldAnchorTransform.TransformPoint(spawnerPos), Quaternion.Euler(spawnerDirection));
+            GameObject nextSpawner = (GameObject)Instantiate(ZombieSpawner, sharedWorldAnchorTransform.InverseTransformPoint(spawnerPos), Quaternion.Euler(spawnerDirection));
 
             NetworkServer.Spawn(nextSpawner);     
         }
@@ -180,18 +188,30 @@ namespace HoloToolkit.Examples.SharingWithUNET
         {
             if (isLocalPlayer)
             {
-                if (isServer) {
-
+                if (isServer)
+                {
                     if (!_zombieSpawnerPlaced)
                     {
                         _zombieSpawnerPlaced = true;
                         CmdPlaceSpawn();
                     }
-                    else
-                        CmdFire();
+                    CmdCtrate();
                 }
                 else
-                    CmdFire();
+
+                    CmdCtrate();  
+                //if (isServer) {
+
+                //    if (!_zombieSpawnerPlaced)
+                //    {
+                //        _zombieSpawnerPlaced = true;
+                //        CmdPlaceSpawn();
+                //    }
+                //    else
+                //        CmdFire();
+                //}
+                //else
+                //    CmdFire();
 
 
             }

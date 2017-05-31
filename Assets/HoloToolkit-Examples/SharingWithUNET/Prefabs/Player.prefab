@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1000013437630216, guid: f59738f66a2923a44b1de68dd1887fd0, type: 2}
+  crate: {fileID: 1877802547673672, guid: b731cea786fe56645a8634cbe9e29d40, type: 2}
   ZombieSpawner: {fileID: 1809914067748444, guid: b5a3a959429e53d4abb75127df9a9a35,
     type: 2}
 --- !u!114 &114019883759929838

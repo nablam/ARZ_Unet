@@ -23,7 +23,7 @@ public class SpawnManager_ZombieSpawner : NetworkBehaviour {
 	{
         isSpawnActivated = true;
         transform.SetParent(SharedCollection.Instance.transform, false);
-        zombieSpawn = this.gameObject.transform.parent.gameObject;//GameObject.FindGameObjectsWithTag("ZombieSpawn");
+        zombieSpawn = this.gameObject.transform.parent.gameObject;
 
         sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;
         rend = GetComponent<Renderer>();
@@ -52,9 +52,7 @@ public class SpawnManager_ZombieSpawner : NetworkBehaviour {
 		{
 			for(int i = 0; i < numberOfZombies; i++)
             {
-                //SpawnZombies(sharedWorldAnchorTransform.transform.position);
                 CmdSpawnZombies();
-
             }
 		}
 	}
@@ -62,24 +60,12 @@ public class SpawnManager_ZombieSpawner : NetworkBehaviour {
     void CmdSpawnZombies()
     {
         sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;
-
         counter++;
-        // GameObject go = GameObject.Instantiate(zombiePrefab, spawnPos, Quaternion.identity) as GameObject;
-        //        GameObject go = (GameObject)Instantiate(zombiePrefab, sharedWorldAnchorTransform.InverseTransformPoint(this.transform.position), Quaternion.Euler(this.transform.forward));
         GameObject go = (GameObject)Instantiate(zombiePrefab, sharedWorldAnchorTransform.InverseTransformPoint(this.transform.position), Quaternion.Euler(this.transform.forward));
-
         go.GetComponent<Zombie_ID>().zombieID = "Zombie " + counter;
         go.GetComponentInChildren<TextMesh>().text += "Zombie " + counter;
         NetworkServer.Spawn(go);
     }
-    void SpawnZombies(Vector3 spawnPos)
-	{
-		counter++;
-		GameObject go = GameObject.Instantiate(zombiePrefab, spawnPos, Quaternion.identity) as GameObject;
-       // GameObject go = (GameObject)Instantiate(zombiePrefab, sharedWorldAnchorTransform.InverseTransformPoint(this.transform.position), Quaternion.Euler(this.transform.forward));
-        go.GetComponent<Zombie_ID>().zombieID = "Zombie " + counter;
-        go.GetComponentInChildren<TextMesh>().text+="Zombie " + counter;
-        NetworkServer.Spawn(go);
-	}
+    
 
 }

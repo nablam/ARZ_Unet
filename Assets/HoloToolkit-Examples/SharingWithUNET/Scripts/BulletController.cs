@@ -21,7 +21,7 @@ namespace HoloToolkit.Examples.SharingWithUNET
             // The rigid body has a velocity that needs to be transformed into 
             // the shared coordinate system.
             Rigidbody rb = GetComponentInChildren<Rigidbody>();
-            rb.velocity = transform.parent.TransformDirection(rb.velocity);
+            rb.velocity = transform.parent.TransformDirection(rb.velocity*2);
 
             tm.text += transform.parent.name;
         }
