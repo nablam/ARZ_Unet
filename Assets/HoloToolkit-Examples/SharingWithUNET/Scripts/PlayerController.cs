@@ -71,7 +71,10 @@ namespace HoloToolkit.Examples.SharingWithUNET
             else
             {
                 Debug.Log("remote player");
-                GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+                if (isServer)
+                    GetComponentInChildren<MeshRenderer>().material.color = Color.green;
+                else
+                    GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
             }
 
             sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;

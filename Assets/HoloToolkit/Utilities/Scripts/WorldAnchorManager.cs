@@ -61,6 +61,10 @@ namespace HoloToolkit.Unity
         {
             base.Awake();
 
+
+        }
+        private void Start()
+        {
             AnchorStore = null;
             WorldAnchorStore.GetAsync(AnchorStoreReady);
         }
