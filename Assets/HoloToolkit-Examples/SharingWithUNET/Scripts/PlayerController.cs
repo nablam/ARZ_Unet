@@ -168,8 +168,10 @@ namespace HoloToolkit.Examples.SharingWithUNET
             Vector3 spawnerPos = transform.position + spawnerDirection;// * 2f;
 
             // The bullet needs to be transformed relative to the shared anchor.
-            GameObject nextSpawner = (GameObject)Instantiate(ZombieSpawner, sharedWorldAnchorTransform.InverseTransformPoint(spawnerPos), Quaternion.Euler(spawnerDirection));
-            
+            //            GameObject nextSpawner = (GameObject)Instantiate(ZombieSpawner, sharedWorldAnchorTransform.InverseTransformPoint(spawnerPos), Quaternion.Euler(spawnerDirection));
+            sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;
+            GameObject nextSpawner = (GameObject)Instantiate(ZombieSpawner, sharedWorldAnchorTransform.TransformPoint(spawnerPos), Quaternion.Euler(spawnerDirection));
+
             NetworkServer.Spawn(nextSpawner);     
         }
         //CmdPlaceSpawn
