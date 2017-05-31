@@ -22,7 +22,7 @@ public class ZNetBehabior : MonoBehaviour {
     Rigidbody rb;
     CapsuleCollider cc;
     Animator[] animator;
-    TextMesh tm;
+    public TextMesh tm;
 
 
     float moveSpeed;                // movement speed
@@ -37,17 +37,12 @@ public class ZNetBehabior : MonoBehaviour {
         rb = gameObject.GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
         animator = GetComponentsInChildren<Animator>();
-        //transform.SetParent(SharedCollection.Instance.transform, false);
-        tm = GetComponentInChildren<TextMesh>();
+        transform.SetParent(SharedCollection.Instance.transform, false);
+        //tm = GetComponentInChildren<TextMesh>();
         tm.text =transform.parent.name;
     }
 
-    private void Start()
-    {
 
-        transform.SetParent(SharedCollection.Instance.transform, false);
-
-    }
     void UpdateAnimation()
     {
         for (int i = 0; i < animator.Length; i++)

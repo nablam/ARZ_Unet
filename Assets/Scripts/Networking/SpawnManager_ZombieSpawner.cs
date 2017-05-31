@@ -33,7 +33,7 @@ public class SpawnManager_ZombieSpawner : NetworkBehaviour {
 
 	IEnumerator ZombieSpawner()
 	{
-		for(;;)
+		for(int x=0;x<10;x++)
 		{
              rend.material.color = Color.green;
 
@@ -61,9 +61,13 @@ public class SpawnManager_ZombieSpawner : NetworkBehaviour {
     [Command]
     void CmdSpawnZombies()
     {
+        sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;
+
         counter++;
-       // GameObject go = GameObject.Instantiate(zombiePrefab, spawnPos, Quaternion.identity) as GameObject;
+        // GameObject go = GameObject.Instantiate(zombiePrefab, spawnPos, Quaternion.identity) as GameObject;
+        //        GameObject go = (GameObject)Instantiate(zombiePrefab, sharedWorldAnchorTransform.InverseTransformPoint(this.transform.position), Quaternion.Euler(this.transform.forward));
         GameObject go = (GameObject)Instantiate(zombiePrefab, sharedWorldAnchorTransform.InverseTransformPoint(this.transform.position), Quaternion.Euler(this.transform.forward));
+
         go.GetComponent<Zombie_ID>().zombieID = "Zombie " + counter;
         go.GetComponentInChildren<TextMesh>().text += "Zombie " + counter;
         NetworkServer.Spawn(go);
