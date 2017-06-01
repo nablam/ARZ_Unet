@@ -20,6 +20,11 @@ namespace HoloToolkit.Examples.SharingWithUNET
         /// </summary>
         public GameObject bullet;
 
+        public GameObject crate;
+
+        bool _zombieSpawnerPlaced=false;
+        public GameObject ZombieSpawner;
+
         /// <summary>
         /// The transform of the shared world anchor.
         /// </summary>
@@ -89,8 +94,20 @@ namespace HoloToolkit.Examples.SharingWithUNET
             }
         }
 
+        private void PewPew() {
+            if (isLocalPlayer)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {                
+                        CmdFire();
+                }
+            }
+        }
         private void Update()
         {
+            PewPew();
+
+
             // If we aren't the local player, we just need to make sure that the position of this object is set properly
             // so that we properly render their avatar in our world.
             if (!isLocalPlayer)
@@ -131,7 +148,7 @@ namespace HoloToolkit.Examples.SharingWithUNET
         void CmdFire()
         {
             Vector3 bulletDir = transform.forward;
-            Vector3 bulletPos = transform.position + bulletDir * 1.5f;
+            Vector3 bulletPos = transform.position + bulletDir * 0.5f;
 
             // The bullet needs to be transformed relative to the shared anchor.
             GameObject nextBullet = (GameObject)Instantiate(bullet, sharedWorldAnchorTransform.InverseTransformPoint(bulletPos), Quaternion.Euler(bulletDir));
@@ -142,11 +159,69 @@ namespace HoloToolkit.Examples.SharingWithUNET
             Destroy(nextBullet, 8.0f);
         }
 
+        [Command]
+        void CmdCtrate()
+        {
+            Vector3 crateDir = transform.forward;
+            Vector3 cratePos = transform.position + crateDir * 0.5f;
+ 
+            GameObject nextCrate = (GameObject)Instantiate(crate, sharedWorldAnchorTransform.InverseTransformPoint(cratePos), Quaternion.Euler(crateDir));
+            
+            NetworkServer.Spawn(nextCrate);
+
+            // Clean up the bullet in 8 seconds.
+            Destroy(nextCrate, 20.0f);
+        }
+
+        [Command]
+        void CmdPlaceSpawn()
+        {
+            Vector3 spawnerDirection = transform.forward;
+            Vector3 spawnerPos = transform.position + spawnerDirection;// * 2f;
+            GameObject nextSpawner = (GameObject)Instantiate(ZombieSpawner, sharedWorldAnchorTransform.InverseTransformPoint(spawnerPos), Quaternion.Euler(spawnerDirection));
+
+            NetworkServer.Spawn(nextSpawner);     
+        }
+        //CmdPlaceSpawn
+
         public void OnInputClicked(InputClickedEventData eventData)
         {
             if (isLocalPlayer)
             {
+
                 CmdFire();
+
+
+
+
+
+               // if (isServer)
+               //{
+               //    if (!_zombieSpawnerPlaced)
+               //    {
+               //        _zombieSpawnerPlaced = true;
+               //        CmdPlaceSpawn();
+               //    }
+               //    CmdCtrate();
+               //}
+               //else
+               //    CmdCtrate();  
+
+
+                //if (isServer) {
+
+                //    if (!_zombieSpawnerPlaced)
+                //    {
+                //        _zombieSpawnerPlaced = true;
+                //        CmdPlaceSpawn();
+                //    }
+                //    else
+                //        CmdFire();
+                //}
+                //else
+                //    CmdFire();
+
+
             }
         }
     }
