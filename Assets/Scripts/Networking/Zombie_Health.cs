@@ -8,6 +8,7 @@ public class Zombie_Health : NetworkBehaviour {
 
 	public void DeductHealth (int dmg)
 	{
+        Debug.Log("ouch");
 		health -= dmg;
 		CheckHealth();
 	}

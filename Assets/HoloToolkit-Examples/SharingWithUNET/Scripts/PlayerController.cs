@@ -188,18 +188,26 @@ namespace HoloToolkit.Examples.SharingWithUNET
         {
             if (isLocalPlayer)
             {
-                if (isServer)
-                {
-                    if (!_zombieSpawnerPlaced)
-                    {
-                        _zombieSpawnerPlaced = true;
-                        CmdPlaceSpawn();
-                    }
-                    CmdCtrate();
-                }
-                else
 
-                    CmdCtrate();  
+                CmdFire();
+
+
+
+
+
+               // if (isServer)
+               //{
+               //    if (!_zombieSpawnerPlaced)
+               //    {
+               //        _zombieSpawnerPlaced = true;
+               //        CmdPlaceSpawn();
+               //    }
+               //    CmdCtrate();
+               //}
+               //else
+               //    CmdCtrate();  
+
+
                 //if (isServer) {
 
                 //    if (!_zombieSpawnerPlaced)

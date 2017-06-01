@@ -10,7 +10,7 @@ public class SpawnManager_ZombieSpawner : NetworkBehaviour {
 	private int counter;
 	private int numberOfZombies = 1;
 	private int maxNumberOfZombies = 80;
-	private float waveRate = 5;
+	private float waveRate = 15;
 	private bool isSpawnActivated ;
     private Transform sharedWorldAnchorTransform;
 
@@ -63,6 +63,7 @@ public class SpawnManager_ZombieSpawner : NetworkBehaviour {
         counter++;
         GameObject go = (GameObject)Instantiate(zombiePrefab, sharedWorldAnchorTransform.InverseTransformPoint(this.transform.position), Quaternion.Euler(this.transform.forward));
         go.GetComponent<Zombie_ID>().zombieID = "Zombie " + counter;
+        go.name = "Zombie " + counter;
         go.GetComponentInChildren<TextMesh>().text += "Zombie " + counter;
         NetworkServer.Spawn(go);
     }
